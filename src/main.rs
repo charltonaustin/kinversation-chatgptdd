@@ -1,12 +1,17 @@
+use std::env;
 fn main() {
-    println!("{}", get_message(None));
+    println!("{}", get_message(get_command_lin_args(env::args().collect())));
 }
 
-fn get_message(name: Option<&str>) -> String {
+fn get_message(name: Option<String>) -> String {
     match name {
         Some(name) => format!("Hello, {}!", name),
         None => "Hello, world!".to_string(),
     }
+}
+
+fn get_command_lin_args(args: Vec<String>) -> Option<String> {
+    args.into_iter().nth(1)
 }
 
 #[cfg(test)]
@@ -20,6 +25,12 @@ mod tests {
 
     #[test]
     fn hello_bob() {
-        assert_eq!("Hello, Bob!", &get_message(Some("Bob")));
+        assert_eq!("Hello, Bob!", &get_message(Some("Bob".to_string())));
+    }
+
+    #[test]
+    fn get_command_line_args() {
+        let args = vec!["program".to_string(), "Bob".to_string()];
+        assert_eq!(Some("Bob".to_string()), get_command_lin_args(args));
     }
 }
