@@ -29,8 +29,13 @@ mod tests {
     }
 
     #[test]
-    fn get_command_line_args() {
+    fn get_command_line_args_with_value() {
         let args = vec!["program".to_string(), "Bob".to_string()];
         assert_eq!(Some("Bob".to_string()), get_command_lin_args(args));
+    }
+    #[test]
+    fn get_command_line_args_without_value() {
+        let args = vec!["program".to_string()];
+        assert_eq!(None, get_command_lin_args(args));
     }
 }
