@@ -1,6 +1,8 @@
 use std::env;
+use grrs::empty_board;
 fn main() {
     println!("{}", get_message(get_command_lin_args(env::args().collect())));
+    println!("{}", empty_board());
 }
 
 fn get_message(name: Option<String>) -> String {
