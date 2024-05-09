@@ -17,7 +17,7 @@ pub fn add_x(mut board: String, position: &str) -> String {
 }
 
 pub fn add_y(mut board: String, position: &str) -> String {
-    add_symbol(&mut board, position, "x")
+    add_symbol(&mut board, position, "y")
 }
 fn add_symbol(board: &mut String, position: &str, symbol: &str) -> String {
     let index = match position {
