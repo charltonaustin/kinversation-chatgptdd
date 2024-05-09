@@ -1,3 +1,5 @@
+mod ai;
+
 pub fn empty_board() -> String {
     "
     a     b     c
