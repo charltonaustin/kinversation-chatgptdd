@@ -1,6 +1,7 @@
-mod score;
-use score::is_winner;
-use score::is_full;
+mod is_full;
+mod is_winner;
+use is_winner::is_winner;
+use is_full::is_full;
 pub fn make_move(board: String) -> String {
     let mut best_score = i32::MIN;
     let mut best_move = String::new();

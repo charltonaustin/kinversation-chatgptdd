@@ -1,14 +1,10 @@
-pub fn is_winner(board: &String, player: char) -> bool {
-    false
-}
-
 pub fn is_full(board: &String) -> bool {
     !board.contains('-')
 }
 
 #[cfg(test)]
 mod tests {
-    use crate::ai::score::is_full;
+    use crate::ai::is_full::is_full;
 
     #[test]
     fn test_is_full_with_one() {
