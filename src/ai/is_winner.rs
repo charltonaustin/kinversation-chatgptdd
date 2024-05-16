@@ -1,3 +1,5 @@
+use std::ops::Index;
+
 pub fn is_winner(board: &String, player: char) -> bool {
     let lines: Vec<&str> = board.split('\n').collect();
 
@@ -10,20 +12,19 @@ pub fn is_winner(board: &String, player: char) -> bool {
     }
 
     // Vertical wins
-    for i in [31, 37, 43] { // indices for columns a, b, c in the first row
-        if lines.iter().enumerate().filter(|&(idx, _)| idx == 3 || idx == 6 || idx == 9)
-            .map(|(_, line)| line.chars().nth(i).unwrap())
-            .filter(|&c| c == player)
-            .count() == 3 {
-            return true;
-        }
+    for row in [4, 10, 15] { // indices for columns a, b, c in the first row
+        let first = lines.index(3);
+        let second = lines.index(6);
+        let third = lines.index(9);
+        if first.chars().nth(row) == second.chars().nth(row) && second.chars().nth(row) == third.chars().nth(row) && third.chars().nth(row) == Some(player) {
+           return true;
+       }
     }
 
     // Diagonal wins
-    let main_diagonal = [lines[3].chars().nth(31).unwrap(), lines[6].chars().nth(37).unwrap(), lines[9].chars().nth(43).unwrap()];
-    let anti_diagonal = [lines[3].chars().nth(43).unwrap(), lines[6].chars().nth(37).unwrap(), lines[9].chars().nth(31).unwrap()];
-
-    if main_diagonal.iter().all(|&c| c == player) || anti_diagonal.iter().all(|&c| c == player) {
+    let main_diagonal = [lines[3].chars().nth(3), lines[6].chars().nth(9), lines[9].chars().nth(15)];
+    let anti_diagonal = [lines[3].chars().nth(15), lines[6].chars().nth(9), lines[9].chars().nth(3)];
+    if main_diagonal.iter().all(|&c| c == Some(player)) || anti_diagonal.iter().all(|&c| c == Some(player)) {
         return true;
     }
 
